@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- 自定义Tailwind配置 -->
     <script>
         tailwind.config = {
@@ -44,7 +45,7 @@
             }
         }
     </script>
-    
+
     <!-- 自定义工具类 -->
     <style>
         /* 基础样式 */
@@ -54,38 +55,52 @@
             color: transparent;
             background-image: linear-gradient(to right, #165DFF, #7B61FF);
         }
-        
+
         .card-hover {
             transition: all 0.3s;
         }
-        
+
         .card-hover:hover {
             transform: scale(1.05);
             box-shadow: 0 10px 25px rgba(22, 93, 255, 0.2);
             background-color: rgba(22, 93, 255, 0.05);
         }
-        
+
         .section-animate {
             opacity: 0;
             animation: slideUp 0.6s ease-out forwards;
         }
-        
+
         .bg-pattern {
             background-image: radial-gradient(rgba(22, 93, 255, 0.1) 1px, transparent 1px);
             background-size: 20px 20px;
         }
-        
+
         /* 卡片容器布局 */
         .card-container {
             display: grid;
             grid-template-columns: 1fr;
             gap: 1.5rem;
         }
-        
-        @media (min-width: 640px) { .card-container { grid-template-columns: repeat(2, 1fr); } }
-        @media (min-width: 1024px) { .card-container { grid-template-columns: repeat(3, 1fr); } }
-        @media (min-width: 1280px) { .card-container { grid-template-columns: repeat(4, 1fr); } }
-        
+
+        @media (min-width: 640px) {
+            .card-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .card-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .card-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
         /* 项目卡片样式 */
         .project-card {
             background-color: white;
@@ -100,7 +115,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         /* 模态框样式 */
         .modal-overlay {
             position: fixed;
@@ -118,12 +133,12 @@
             visibility: hidden;
             transition: all 0.3s ease-in-out;
         }
-        
+
         .modal-overlay.active {
             opacity: 1;
             visibility: visible;
         }
-        
+
         .modal-content {
             background: #ffffff;
             border-radius: 1.25rem;
@@ -136,35 +151,35 @@
             transition: transform 0.3s ease-in-out;
             text-align: center;
         }
-        
+
         .modal-overlay.active .modal-content {
             transform: scale(1);
         }
-        
+
         .modal-header {
             margin-bottom: 1.5rem;
         }
-        
+
         .modal-title {
             font-size: 1.25rem;
             font-weight: 600;
             color: #303133;
             margin-bottom: 0.5rem;
         }
-        
+
         .modal-subtitle {
             font-size: 0.875rem;
             color: #909399;
             font-weight: 400;
         }
-        
+
         .qr-image-container {
             margin-bottom: 2rem;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-        
+
         .qr-image {
             width: 260px;
             height: 260px;
@@ -172,13 +187,13 @@
             border-radius: 0.75rem;
             background: transparent;
         }
-        
+
         .modal-actions {
             display: flex;
             gap: 1rem;
             width: 100%;
         }
-        
+
         .modal-btn {
             flex: 1;
             padding: 0.75rem 1.25rem;
@@ -190,81 +205,81 @@
             border: 1px solid;
             letter-spacing: normal;
         }
-        
+
         /* Element UI 风格按钮 */
         .modal-btn-primary {
             background-color: #409eff;
             color: #ffffff;
             border-color: #409eff;
         }
-        
+
         .modal-btn-primary:hover {
             background-color: #66b1ff;
             border-color: #66b1ff;
         }
-        
+
         .modal-btn-primary:active {
             background-color: #3a8ee6;
             border-color: #3a8ee6;
         }
-        
+
         .modal-btn-secondary {
             background-color: #ffffff;
             color: #606266;
             border-color: #dcdfe6;
         }
-        
+
         .modal-btn-secondary:hover {
             background-color: #ecf5ff;
             color: #409eff;
             border-color: #c6e2ff;
         }
-        
+
         .modal-btn-secondary:active {
             background-color: #f2f6fc;
             color: #409eff;
             border-color: #c6e2ff;
         }
-        
+
         .dark-mode .modal-content {
             background: #1d1e23;
         }
-        
+
         .dark-mode .modal-title {
             color: #e4e7ed;
         }
-        
+
         .dark-mode .modal-subtitle {
             color: #909399;
         }
-        
+
         .dark-mode .qr-image-container {
             background: transparent;
             border: none;
         }
-        
+
         .dark-mode .modal-btn-primary {
             background-color: #409eff;
             border-color: #409eff;
         }
-        
+
         .dark-mode .modal-btn-primary:hover {
             background-color: #66b1ff;
             border-color: #66b1ff;
         }
-        
+
         .dark-mode .modal-btn-secondary {
             background-color: #2b2d33;
             color: #c0c4cc;
             border-color: #4c4d52;
         }
-        
+
         .dark-mode .modal-btn-secondary:hover {
             background-color: #303133;
             color: #409eff;
             border-color: #409eff;
         }
-        
+
         /* Element UI暗色模式提示 */
         @media (prefers-color-scheme: dark) {
             .modal-content[style*="background-color: #67c23a"] {
@@ -272,61 +287,65 @@
                 border-color: #4a8c2a !important;
             }
         }
-        
+
         /* Element UI风格提示动画 */
         @keyframes slideDownFade {
-            0% { 
-                opacity: 0; 
-                transform: translateX(-50%) translateY(-20px); 
+            0% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px);
             }
-            15% { 
-                opacity: 1; 
-                transform: translateX(-50%) translateY(0); 
+
+            15% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
             }
-            85% { 
-                opacity: 1; 
-                transform: translateX(-50%) translateY(0); 
+
+            85% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
             }
-            100% { 
-                opacity: 0; 
-                transform: translateX(-50%) translateY(-20px); 
+
+            100% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px);
             }
         }
+
         .dark-mode .modal-btn-secondary:hover {
             background: linear-gradient(135deg, #475569, #4B5563);
         }
-        
+
         .card-header {
             display: flex;
             align-items: center;
             margin-bottom: 0.75rem;
         }
-        
+
         .card-icon {
             font-size: 1.5rem;
             margin-right: 0.75rem;
             flex-shrink: 0;
         }
-        
+
         .card-title {
             font-size: 1.125rem;
             font-weight: 500;
             white-space: nowrap;
         }
-        
+
         .card-desc {
             font-size: 0.875rem;
             color: #6B7280;
             flex-grow: 1;
         }
-        
+
         .card-footer {
             margin-top: 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .visit-btn {
             background-color: #165DFF;
             color: white;
@@ -336,67 +355,90 @@
             font-size: 0.875rem;
             transition: background-color 0.3s;
         }
-        
+
         .visit-btn:hover {
             background-color: #0E4BCC;
         }
-        
+
         /* 黑暗模式样式 */
         .dark-mode {
             background-color: #0F172A;
             color: #E2E8F0;
         }
-        
+
         .dark-mode .bg-pattern {
             background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
         }
-        
+
         .dark-mode .text-gradient {
             background-image: linear-gradient(to right, #60A5FA, #A78BFA);
         }
-        
+
         .dark-mode .project-card {
             background-color: #1E293B;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
         }
-        
+
         .dark-mode .card-desc,
         .dark-mode .text-gray-600 {
             color: #94A3B8;
         }
-        
+
         .dark-mode .text-gray-500 {
             color: #64748B;
         }
-        
+
         .dark-mode footer,
         .dark-mode .bg-dark {
             background-color: #0F172A;
         }
-        
+
         .dark-mode .card-hover:hover {
             background-color: rgba(96, 165, 250, 0.1);
             box-shadow: 0 10px 25px rgba(96, 165, 250, 0.2);
         }
-        
+
         .dark-mode .visit-btn {
             background-color: #60A5FA;
         }
-        
+
         .dark-mode .visit-btn:hover {
             background-color: #3B82F6;
         }
-        
+
         /* 颜色变体背景 */
-        .dark-mode .bg-primary\/10 { background-color: rgba(96, 165, 250, 0.1); }
-        .dark-mode .bg-secondary\/10 { background-color: rgba(167, 139, 250, 0.1); }
-        .dark-mode .bg-success\/10 { background-color: rgba(52, 211, 153, 0.1); }
-        .dark-mode .bg-accent\/10 { background-color: rgba(251, 113, 133, 0.1); }
-        .dark-mode .bg-warning\/10 { background-color: rgba(251, 191, 36, 0.1); }
-        .dark-mode .bg-info\/10 { background-color: rgba(56, 189, 248, 0.1); }
-        .dark-mode .bg-dark\/10 { background-color: rgba(148, 163, 184, 0.1); }
-        .dark-mode .bg-light\/10 { background-color: rgba(226, 232, 240, 0.1); }
-        
+        .dark-mode .bg-primary\/10 {
+            background-color: rgba(96, 165, 250, 0.1);
+        }
+
+        .dark-mode .bg-secondary\/10 {
+            background-color: rgba(167, 139, 250, 0.1);
+        }
+
+        .dark-mode .bg-success\/10 {
+            background-color: rgba(52, 211, 153, 0.1);
+        }
+
+        .dark-mode .bg-accent\/10 {
+            background-color: rgba(251, 113, 133, 0.1);
+        }
+
+        .dark-mode .bg-warning\/10 {
+            background-color: rgba(251, 191, 36, 0.1);
+        }
+
+        .dark-mode .bg-info\/10 {
+            background-color: rgba(56, 189, 248, 0.1);
+        }
+
+        .dark-mode .bg-dark\/10 {
+            background-color: rgba(148, 163, 184, 0.1);
+        }
+
+        .dark-mode .bg-light\/10 {
+            background-color: rgba(226, 232, 240, 0.1);
+        }
+
         /* 主题切换按钮 */
         .theme-toggle {
             position: fixed;
@@ -415,12 +457,12 @@
             z-index: 100;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        
+
         .theme-toggle:hover {
             transform: scale(1.1);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
-        
+
         .theme-toggle i {
             font-size: 1.75rem;
             position: absolute;
@@ -428,30 +470,40 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
-        
+
         .fa-sun-o {
             display: block;
             color: #FBBD23;
         }
-        
+
         .fa-moon-o {
             display: none;
             color: #E2E8F0;
         }
-        
+
         .dark-mode .theme-toggle {
             background-color: #1E293B;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
-        .dark-mode .fa-sun-o { display: none; }
-        .dark-mode .fa-moon-o { display: block; }
-        
+
+        .dark-mode .fa-sun-o {
+            display: none;
+        }
+
+        .dark-mode .fa-moon-o {
+            display: block;
+        }
+
         /* 特殊样式 */
         .dark-mode .text-dark,
-        .dark-mode .border-dark { color: #E2E8F0 !important; }
-        .dark-mode .border-dark { border-top-color: #E2E8F0 !important; }
-        
+        .dark-mode .border-dark {
+            color: #E2E8F0 !important;
+        }
+
+        .dark-mode .border-dark {
+            border-top-color: #E2E8F0 !important;
+        }
+
         /* 项目标签样式 */
         .project-tag {
             display: inline-block;
@@ -460,29 +512,69 @@
             font-size: 0.75rem;
             font-weight: 500;
         }
-        
-        .tag-web { background-color: rgba(22, 93, 255, 0.1); color: #165DFF; }
-        .tag-tool { background-color: rgba(123, 97, 255, 0.1); color: #7B61FF; }
-        .tag-education { background-color: rgba(54, 211, 153, 0.1); color: #36D399; }
-        .tag-utility { background-color: rgba(251, 189, 35, 0.1); color: #FBBD23; }
-        .tag-miniprogram { background-color: rgba(255, 107, 107, 0.1); color: #FF6B6B; }
-        
-        .dark-mode .tag-web { background-color: rgba(96, 165, 250, 0.1); color: #60A5FA; }
-        .dark-mode .tag-tool { background-color: rgba(167, 139, 250, 0.1); color: #A78BFA; }
-        .dark-mode .tag-education { background-color: rgba(52, 211, 153, 0.1); color: #34D399; }
-        .dark-mode .tag-utility { background-color: rgba(251, 191, 36, 0.1); color: #FBBF24; }
-        .dark-mode .tag-miniprogram { background-color: rgba(251, 113, 133, 0.1); color: #FB7185; }
+
+        .tag-web {
+            background-color: rgba(22, 93, 255, 0.1);
+            color: #165DFF;
+        }
+
+        .tag-tool {
+            background-color: rgba(123, 97, 255, 0.1);
+            color: #7B61FF;
+        }
+
+        .tag-education {
+            background-color: rgba(54, 211, 153, 0.1);
+            color: #36D399;
+        }
+
+        .tag-utility {
+            background-color: rgba(251, 189, 35, 0.1);
+            color: #FBBD23;
+        }
+
+        .tag-miniprogram {
+            background-color: rgba(255, 107, 107, 0.1);
+            color: #FF6B6B;
+        }
+
+        .dark-mode .tag-web {
+            background-color: rgba(96, 165, 250, 0.1);
+            color: #60A5FA;
+        }
+
+        .dark-mode .tag-tool {
+            background-color: rgba(167, 139, 250, 0.1);
+            color: #A78BFA;
+        }
+
+        .dark-mode .tag-education {
+            background-color: rgba(52, 211, 153, 0.1);
+            color: #34D399;
+        }
+
+        .dark-mode .tag-utility {
+            background-color: rgba(251, 191, 36, 0.1);
+            color: #FBBF24;
+        }
+
+        .dark-mode .tag-miniprogram {
+            background-color: rgba(251, 113, 133, 0.1);
+            color: #FB7185;
+        }
     </style>
 </head>
+
 <body class="font-inter bg-light bg-pattern min-h-screen flex flex-col">
     <!-- 光明/黑暗模式切换按钮 -->
     <button id="themeToggle" class="theme-toggle" title="切换主题">
         <i class="fa fa-sun-o"></i>
         <i class="fa fa-moon-o"></i>
     </button>
-    
+
     <!-- 回到顶部按钮 -->
-    <button id="backToTop" class="fixed bottom-6 right-6 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 transition-all duration-300 hover:bg-primary/90 z-50">
+    <button id="backToTop"
+        class="fixed bottom-6 right-6 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 transition-all duration-300 hover:bg-primary/90 z-50">
         <i class="fa fa-arrow-up"></i>
     </button>
 
@@ -505,7 +597,7 @@
                 <h2 class="text-[clamp(1.2rem,3vw,1.8rem)] font-semibold text-dark">实用工具</h2>
                 <div class="h-0.5 flex-grow ml-4 bg-gradient-to-r from-primary to-transparent"></div>
             </div>
-            
+
             <div class="card-container">
                 <!-- 新电脑装机推荐软件 -->
                 <div class="project-card border-primary card-hover">
@@ -541,7 +633,7 @@
                     </div>
                 </div>
 
-                
+
                 <!-- PDF在线编辑 -->
                 <div class="project-card border-secondary card-hover">
                     <div class="card-header">
@@ -573,6 +665,23 @@
                         <button onclick="showQRCodeModal('等会选啥')" class="visit-btn">
                             查看二维码 <i class="fa fa-qrcode ml-1"></i>
                         </button>
+                    </div>
+                </div>
+
+                <!-- 旅途印记 -->
+                <div class="project-card border-primary card-hover">
+                    <div class="card-header">
+                        <i class="fa fa-plane text-primary card-icon"></i>
+                        <h3 class="card-title">旅途印记</h3>
+                    </div>
+                    <p class="card-desc">
+                        旅游攻略管理应用，支持用户创建和管理旅行行程、安排每日日程、选择地图位置，并提供行程分享、导出海报等功能。
+                    </p>
+                    <div class="card-footer">
+                        <span class="project-tag tag-web">在线网页</span>
+                        <a href="http://travel.wushuai.xyz/" target="_blank" rel="noopener" class="visit-btn">
+                            访问网站 <i class="fa fa-external-link ml-1"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -625,76 +734,76 @@
             const backToTopBtn = document.getElementById('backToTop');
             const themeToggle = document.getElementById('themeToggle');
             const body = document.body;
-            
+
             // 主题初始化
             const savedTheme = localStorage.getItem('theme');
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            
+
             // 确保body有背景色类
             if (!body.classList.contains('bg-light') && !body.classList.contains('bg-dark')) {
                 body.classList.add('bg-light');
             }
-            
+
             // 根据保存的设置或系统偏好设置主题
             if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
                 body.classList.add('dark-mode');
                 body.classList.replace('bg-light', 'bg-dark');
                 localStorage.setItem('theme', 'dark');
             }
-            
+
             // 主题切换逻辑
             themeToggle.addEventListener('click', () => {
                 const isDark = body.classList.toggle('dark-mode');
                 body.classList.replace(isDark ? 'bg-light' : 'bg-dark', isDark ? 'bg-dark' : 'bg-light');
                 localStorage.setItem('theme', isDark ? 'dark' : 'light');
             });
-            
+
             // 回到顶部按钮
             window.addEventListener('scroll', () => {
                 backToTopBtn.classList.toggle('opacity-0', window.scrollY <= 300);
                 backToTopBtn.classList.toggle('opacity-100', window.scrollY > 300);
             });
-            
+
             backToTopBtn.addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
-            
+
             // 板块动画
             const observer = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) entry.target.style.opacity = '1';
                 });
             }, { threshold: 0.1 });
-            
+
             document.querySelectorAll('.section-animate').forEach(section => {
                 observer.observe(section);
             });
-            
+
             // 显示二维码模态框
-            window.showQRCodeModal = function(appName) {
+            window.showQRCodeModal = function (appName) {
                 const modal = document.getElementById('qrModal');
                 const modalTitle = document.getElementById('modalTitle');
                 const modalQRImage = document.getElementById('modalQRImage');
-                
+
                 // 设置模态框内容
                 modalTitle.textContent = appName;
                 modalQRImage.src = '等会选啥.jpg';
                 modalQRImage.alt = appName + '小程序二维码';
-                
+
                 // 显示模态框
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden'; // 防止背景滚动
             };
-            
+
             // 关闭二维码模态框
-            window.closeQRCodeModal = function() {
+            window.closeQRCodeModal = function () {
                 const modal = document.getElementById('qrModal');
                 modal.classList.remove('active');
                 document.body.style.overflow = ''; // 恢复背景滚动
             };
-            
+
             // 复制小程序名称（企业级功能）
-            window.copyAppName = function() {
+            window.copyAppName = function () {
                 const appName = document.getElementById('modalTitle').textContent;
                 navigator.clipboard.writeText(appName).then(() => {
                     // 显示复制成功提示
@@ -710,9 +819,9 @@
                     showCopySuccess(appName);
                 });
             };
-            
+
             // 显示复制成功提示
-            window.showCopySuccess = function(appName) {
+            window.showCopySuccess = function (appName) {
                 // 创建临时提示元素 - Element UI风格
                 const toast = document.createElement('div');
                 toast.innerHTML = `
@@ -741,22 +850,22 @@
                     </div>
                 `;
                 document.body.appendChild(toast);
-                
+
                 // 2秒后自动移除
                 setTimeout(() => {
                     document.body.removeChild(toast);
                 }, 2000);
             };
-            
+
             // 点击模态框外部关闭
-            document.getElementById('qrModal').addEventListener('click', function(e) {
+            document.getElementById('qrModal').addEventListener('click', function (e) {
                 if (e.target === this) {
                     closeQRCodeModal();
                 }
             });
-            
+
             // ESC键关闭模态框
-            document.addEventListener('keydown', function(e) {
+            document.addEventListener('keydown', function (e) {
                 if (e.key === 'Escape') {
                     closeQRCodeModal();
                 }
@@ -764,4 +873,5 @@
         });
     </script>
 </body>
+
 </html>
